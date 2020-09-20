@@ -14,7 +14,9 @@ def lambda_handler(event, context):
 ##step2 save the request body to new file in s3 bucket
 
 
-    s3 = boto3.resource('s3')
+    s3 = boto3.resource('s3',region_name='us-east-1',
+    aws_access_key_id=KEY_ID,
+    aws_secret_access_key=ACCESS_KEY)
     content=result['body']
     s3.Object('localopenweatherdata', 'localweather.txt').put(Body=content)
 
