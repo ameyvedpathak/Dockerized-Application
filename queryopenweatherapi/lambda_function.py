@@ -1,4 +1,5 @@
 import json
+import boto3
 from urllib.request import urlopen
 
 
@@ -9,5 +10,12 @@ def lambda_handler(event, context):
     project_info = json.loads(raw_data)
     result = {'headers': http_info.items(), 'body': project_info}
     print(result['body'])
+##step1 navigate to s3 bucket
+##step2 save the request body to new file in s3 bucket
+
+    s3 = boto3.client('s3')
+    s3 = boto3.resource('s3')
+    content=result['body']
+    s3.Object('localopenweatherdata', 'localweather.txt').put(Body=content)
 
     return None
