@@ -1,5 +1,6 @@
 import json
 import boto3
+import time
 from urllib.request import urlopen
 
 
@@ -15,7 +16,8 @@ def lambda_handler(event, context):
 
 
     s3 = boto3.resource('s3')
-    content="This is sample text!!!!!!"#result['body']
-    s3.Object('openweatherdata', 'localweather.txt').put(Body=content)
+    content=result['body']
+    timestr = time.strftime("%Y%m%d-%H%M%S")
+    s3.Object('localopenweatherdata', timestr).put(Body=content)
 
     return None
