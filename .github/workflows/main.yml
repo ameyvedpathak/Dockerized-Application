@@ -50,10 +50,12 @@ jobs:
       run: |
          #install PIP
          python -m pip install --upgrade pip
+         cd ./queryopenweatherapi/
+         ls -
          #install all dependencies as defined by requirements.txt in the current directory
-         pip3 install -r ./queryopenweatherapi/requirements.txt -t ./queryopenweatherapi/
+         pip3 install -r requirements.txt -t .
          #zip files into current directory
-         zip -r queryopenweatherapi.zip ./queryopenweatherapi/
+         zip -r ./../queryopenweatherapi.zip .
 
          # #for installing chrome
          # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
