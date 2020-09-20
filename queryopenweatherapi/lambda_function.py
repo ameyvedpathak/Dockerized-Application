@@ -15,7 +15,7 @@ def lambda_handler(event, context):
 
 
     s3 = boto3.resource('s3')
-    content=result['body']
+    content="This is sample text!!!!!!"#result['body']
     s3.Object('localopenweatherdata', 'localweather.txt').put(Body=content)
 
     return None
