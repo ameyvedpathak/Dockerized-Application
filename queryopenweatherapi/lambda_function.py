@@ -16,7 +16,7 @@ def lambda_handler(event, context):
 
 
     s3 = boto3.resource('s3')
-    content=result['body']
+    content=str(result['body'])
     timestr = time.strftime("%Y%m%d-%H%M%S")
     s3.Object('localopenweatherdata', timestr).put(Body=content)
 
