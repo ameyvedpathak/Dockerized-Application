@@ -56,6 +56,8 @@ jobs:
          pip3 install -r requirements.txt -t .
          #zip files into current directory
          zip -r ./../queryopenweatherapi.zip .
+         cd ..
+         ls -a
 
          # #for installing chrome
          # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
