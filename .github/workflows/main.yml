@@ -51,7 +51,7 @@ jobs:
          #install PIP
          python -m pip install --upgrade pip
          cd ./queryopenweatherapi/
-         ls -
+         ls -a
          #install all dependencies as defined by requirements.txt in the current directory
          pip3 install -r requirements.txt -t .
          #zip files into current directory
