@@ -13,7 +13,7 @@ def lambda_handler(event, context):
 ##step1 navigate to s3 bucket
 ##step2 save the request body to new file in s3 bucket
 
-    s3 = boto3.client('s3')
+
     s3 = boto3.resource('s3')
     content=result['body']
     s3.Object('localopenweatherdata', 'localweather.txt').put(Body=content)
