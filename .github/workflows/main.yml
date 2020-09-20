@@ -46,7 +46,7 @@ jobs:
         s3_bucket: openweatherdata
 
     # Runs a set of commands using the runners shell; THIS DOESN'T WORK
-    - name: Run a multi-line script
+    - name: Run a multi-line script for queryopenweatherapi
       run: |
          #install PIP
          python -m pip install --upgrade pip
@@ -65,10 +65,38 @@ jobs:
          export PATH=$PATH:$(pwd)
 
     #Deploy main.py to AWS
-    - name: AWS Lambda Deploy
+    - name: AWS Lambda Deploy for queryopenweatherapi
       uses: appleboy/lambda-action@v0.0.4
       with:
             #name of my AWS Lambda Function
             function_name: queryopenweatherapi
             #contains all the files in my github repository
             zip_file: queryopenweatherapi.zip
+
+
+
+    ######################################################
+
+    # Runs a set of commands using the runners shell; THIS DOESN'T WORK
+    - name: Run a multi-line script for dataextractor
+      run: |
+         #install PIP
+         python -m pip install --upgrade pip
+         cd ./dataextractor/
+         ls -a
+         #install all dependencies as defined by requirements.txt in the current directory
+         pip3 install -r requirements.txt -t .
+         #zip files into current directory
+         zip -r ./../dataextractor.zip .
+
+         #ensuring current working directory is accessible by the function--this might not be doing anything
+         export PATH=$PATH:$(pwd)
+
+    #Deploy main.py to AWS
+    - name: AWS Lambda Deploy for dataextractor
+      uses: appleboy/lambda-action@v0.0.4
+      with:
+            #name of my AWS Lambda Function
+            function_name: dataextractor
+            #contains all the files in my github repository
+            zip_file: dataextractor.zip
