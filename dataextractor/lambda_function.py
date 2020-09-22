@@ -25,36 +25,36 @@ def lambda_handler(event, context):
             print(data[i]['name'])
             print(data[i]['weather'][0])
 
-        # client = boto3.client('dynamodb', region_name='us-east-1')
-        #
-        # try:
-        #     resp = client.create_table(
-        #         TableName="simplifiedopenweatherdata",
-        #         # Declare your Primary Key in the KeySchema argument
-        #         KeySchema=[
-        #             {
-        #                 "AttributeName": "name",
-        #                 "KeyType": "HASH"
-        #             }
-        #         ],
-        # # Any attributes used in KeySchema or Indexes must be declared in AttributeDefinitions
-        #         AttributeDefinitions=[
-        #             {
-        #                 "AttributeName": "name",
-        #                 "AttributeType": "S"
-        #             }
-        #         ],
-        # # ProvisionedThroughput controls the amount of data you can read or write to DynamoDB per second.
-        # # You can control read and write capacity independently.
-        #         ProvisionedThroughput={
-        #             "ReadCapacityUnits": 1,
-        #             "WriteCapacityUnits": 1
-        #         }
-        #     )
-        #     print("Table created successfully!")
-        # except Exception as e:
-        #     print("Error creating table:")
-        #     print(e)
+        client = boto3.client('dynamodb', region_name='us-east-1')
+
+        try:
+            resp = client.create_table(
+                TableName="simplifiedopenweatherdata",
+                # Declare your Primary Key in the KeySchema argument
+                KeySchema=[
+                    {
+                        "AttributeName": "name",
+                        "KeyType": "HASH"
+                    }
+                ],
+        # Any attributes used in KeySchema or Indexes must be declared in AttributeDefinitions
+                AttributeDefinitions=[
+                    {
+                        "AttributeName": "name",
+                        "AttributeType": "S"
+                    }
+                ],
+        # ProvisionedThroughput controls the amount of data you can read or write to DynamoDB per second.
+        # You can control read and write capacity independently.
+                ProvisionedThroughput={
+                    "ReadCapacityUnits": 1,
+                    "WriteCapacityUnits": 1
+                }
+            )
+            print("Table created successfully!")
+        except Exception as e:
+            print("Error creating table:")
+            print(e)
 
         dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
         table = dynamodb.Table('simplifiedopenweatherdata')
