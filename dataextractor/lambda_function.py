@@ -57,7 +57,7 @@ def lambda_handler(event, context):
 
         for i in range(len(data)):
             with table.batch_writer() as batch:
-                batch.put_item(Item={"name": data[i]['name'], "contact": data[i]['weather'][0]})
+                batch.put_item(Item={"name": data[i]['name'], "weather": data[i]['weather'][0]})
 
 
 
