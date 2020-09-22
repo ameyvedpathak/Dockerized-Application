@@ -102,3 +102,8 @@ jobs:
             function_name: dataextractor
             #contains all the files in my github repository
             zip_file: dataextractor.zip
+
+    - name: Display directory structure
+      run: |
+          cd ..
+          ls -a
