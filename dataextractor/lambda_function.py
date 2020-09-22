@@ -21,9 +21,10 @@ def lambda_handler(event, context):
         file_content = obj.get()['Body'].read().decode('utf-8')
         res=(eval(file_content))
         data=res['list']
-        for i in range(len(data)):
-            print(data[i]['name'])
-            print(data[i]['weather'][0])
+        # for i in range(len(data)):
+        #     print(data[i]['name'])
+        #     print(data[i]['weather'][0])
+
         ######## Table creation########
         # client = boto3.client('dynamodb', region_name='us-east-1')
         # try:
