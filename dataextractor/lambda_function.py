@@ -55,22 +55,22 @@ def lambda_handler(event, context):
         # except Exception as e:
         #     print("Error creating table:")
         #     print(e)
-        #
-        # dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-        # table = dynamodb.Table('simplifiedopenweatherdata')
-        #
-        # for i in range(len(data)):
-        #     with table.batch_writer() as batch:
-        #         batch.put_item(Item={"name": data[i]['name'], "contact": data[i]['weather'][0]})
-        #
-        #
-        #
-        # result=[]
-        # for i in range(len(data)):
-        #     resp=(table.get_item(Key={"name": data[i]['name']}))
-        #     result.append(resp['Item'])
-        #
-        # print(result)
+
+        dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+        table = dynamodb.Table('simplifiedopenweatherdata')
+
+        for i in range(len(data)):
+            with table.batch_writer() as batch:
+                batch.put_item(Item={"name": data[i]['name'], "contact": data[i]['weather'][0]})
+
+
+
+        result=[]
+        for i in range(len(data)):
+            resp=(table.get_item(Key={"name": data[i]['name']}))
+            result.append(resp['Item'])
+
+        print(result)
 
         # tmpkey = key.replace('/', '')
         # download_path = '/tmp/{}{}'.format(uuid.uuid4(), tmpkey)
