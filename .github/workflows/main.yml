@@ -43,7 +43,7 @@ jobs:
         profile_name: default
         project_name: CICD
         runtime: python3.8
-        s3_bucket: openweatherdata
+        s3_bucket: localopenweatherdata
 
     # Runs a set of commands using the runners shell; THIS DOESN'T WORK
     - name: Run a multi-line script for queryopenweatherapi
