@@ -12,3 +12,5 @@
 1. Using JS, hit the URL of API gateway
 2. read all the data from dynamoDB table and return as Json response
 3. get the json response and display in tabular format in HTML
+
+Please refer to workflow_understanding document.
