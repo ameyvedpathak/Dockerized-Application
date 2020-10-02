@@ -1,16 +1,12 @@
-#This is a basic workflow to help you get started with Actions
 
 name: CI
 
-# Controls when the action will run. Triggers the workflow on push or pull request
+# Controls when the action will run. Triggers the workflow on push request
 # events but only for the master branch
 on:
   #when there is a push to the master
   push:
     branches: [ master ]
-  # #when there is a pull to the master
-  # pull_request:
-  #   branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,12 +18,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    #does this mean that the files in my github repo are accessible by this YAML file?
+    # Checks-out your repository under github workspace
     - name: Git checkout
       uses: actions/checkout@v2
 
-    #installs a version of python, but I need this if deploying to a severless Python Lambda?
+    #installs a version of python
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -45,7 +40,7 @@ jobs:
         runtime: python3.8
         s3_bucket: localopenweatherdata
 
-    # Runs a set of commands using the runners shell; THIS DOESN'T WORK
+    # Runs a set of commands using the runners shell; This is for first lambda function
     - name: Run a multi-line script for queryopenweatherapi
       run: |
          #install PIP
@@ -58,10 +53,6 @@ jobs:
          zip -r ./../queryopenweatherapi.zip .
          cd ..
 
-         # #for installing chrome
-         # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-         # sudo dpkg -i google-chrome-stable_current_amd64.deb
-
          #ensuring current working directory is accessible by the function--this might not be doing anything
          export PATH=$PATH:$(pwd)
 
@@ -73,12 +64,8 @@ jobs:
             function_name: queryopenweatherapi
             #contains all the files in my github repository
             zip_file: queryopenweatherapi.zip
-
-
-
     ######################################################
-
-    # Runs a set of commands using the runners shell; THIS DOESN'T WORK
+    # Runs a set of commands using the runners shell; This is for second lambda function
     - name: Run a multi-line script for dataextractor
       run: |
          #install PIP
@@ -103,9 +90,8 @@ jobs:
             #contains all the files in my github repository
             zip_file: dataextractor.zip
 
-
     ########################################################
-    # Runs a set of commands using the runners shell; THIS DOESN'T WORK
+    # Runs a set of commands using the runners shell; This is for first lambda function
     - name: Run a multi-line script for querysimplifiedopenweatherdata
       run: |
          #install PIP
@@ -117,10 +103,6 @@ jobs:
          #zip files into current directory
          zip -r ./../querysimplifiedopenweatherdata.zip .
          cd ..
-
-         # #for installing chrome
-         # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-         # sudo dpkg -i google-chrome-stable_current_amd64.deb
 
          #ensuring current working directory is accessible by the function--this might not be doing anything
          export PATH=$PATH:$(pwd)
